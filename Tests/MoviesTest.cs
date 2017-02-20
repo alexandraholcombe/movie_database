@@ -27,5 +27,21 @@ namespace Catalog.Objects
       //Assert
       Assert.Equal(0,result);
     }
+
+    [Fact]
+    public void Test_Save_SavesToDatabase()
+    {
+      //Arrange
+      Movie testMovie = new Movie("JAWS");
+
+      //Act
+      testMovie.Save();
+      List<Movie> result = Movie.GetAll();
+      List<Movie> testList = new List<Movie>{testMovie};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
+
   }
 }
