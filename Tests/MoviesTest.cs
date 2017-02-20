@@ -40,7 +40,7 @@ namespace Catalog.Objects
       List<Movie> testList = new List<Movie>{testMovie};
 
       //Assert
-      Assert.Equal(testList, result);
+      Assert.Equal(testList[0].GetName(), result[0].GetName());
     }
 
   }

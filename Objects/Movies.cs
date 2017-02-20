@@ -45,6 +45,32 @@ namespace Catalog.Objects
       return allMovies;
     }
 
+    public void Save()
+    {
+      SqlConnection connection = DB.Connection();
+      connection.Open();
+
+      SqlCommand command = new SqlCommand("INSERT INTO movies (name) OUTPUT INSERTED.id VALUES (@MovieName);", connection);
+
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@MovieName";
+      nameParameter.Value = this.GetName();
+      command.Parameters.Add(nameParameter);
+      SqlDataReader reader = command.ExecuteReader();
+
+      while(reader.Read())
+      {
+        this._id = reader.GetInt32(0);
+      }
+      if (reader != null)
+      {
+        reader.Close();
+      }
+      if (connection != null)
+      {
+        connection.Close();
+      }
+    }
 
     public string GetName()
     {
