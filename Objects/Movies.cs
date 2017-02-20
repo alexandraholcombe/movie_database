@@ -15,6 +15,26 @@ namespace Catalog.Objects
       _id = newId;
     }
 
+    public override bool Equals(System.Object otherMovie)
+    {
+      if (!(otherMovie is Movie))
+      {
+        return false;
+      }
+      else
+      {
+        Movie newMovie = (Movie) otherMovie;
+        bool idEquality = (this.GetId() == newMovie.GetId());
+        bool nameEquality = (this.GetName() == newMovie.GetName());
+        return (nameEquality && idEquality);
+      }
+    }
+
+    public override int GetHashCode()
+    {
+      return this.GetId().GetHashCode();
+    }
+
     public static void DeleteAll()
     {
       SqlConnection connection = DB.Connection();
@@ -89,7 +109,5 @@ namespace Catalog.Objects
     {
       _id = newId;
     }
-
-
   }
 }

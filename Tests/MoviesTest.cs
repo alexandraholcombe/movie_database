@@ -40,7 +40,20 @@ namespace Catalog.Objects
       List<Movie> testList = new List<Movie>{testMovie};
 
       //Assert
-      Assert.Equal(testList[0].GetName(), result[0].GetName());
+      Assert.Equal(testList[0], result[0]);
+    }
+
+    [Fact]
+    public void Test_Assert_FailsDifferentObjects()
+    {
+      //Arrange
+      Movie testMovie = new Movie("JAWS", 1);
+      Movie otherMovie = new Movie("Elf", 1);
+
+      //Act
+
+      //Assert
+      Assert.Equal(testMovie, otherMovie);
     }
 
   }
