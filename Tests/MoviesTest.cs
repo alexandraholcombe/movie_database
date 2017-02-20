@@ -19,7 +19,7 @@ namespace Catalog.Objects
     }
 
     [Fact]
-    public void Test_MovieDatabaseEmptyAtFirst()
+    public void Test_MovieTableEmptyAtFirst()
     {
       //Arrange Act
       int result = Movie.GetAll().Count;
@@ -41,19 +41,6 @@ namespace Catalog.Objects
 
       //Assert
       Assert.Equal(testList[0], result[0]);
-    }
-
-    [Fact]
-    public void Test_Assert_FailsDifferentObjects()
-    {
-      //Arrange
-      Movie testMovie = new Movie("JAWS", 1);
-      Movie otherMovie = new Movie("Elf", 1);
-
-      //Act
-
-      //Assert
-      Assert.Equal(testMovie, otherMovie);
     }
 
   }
