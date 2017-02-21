@@ -44,6 +44,34 @@ namespace Catalog.Objects
       return allActors;
     }
 
+    public void Save()
+    {
+      SqlConnection connection = DB.Connection();
+      connection.Open();
+
+      SqlCommand command = new SqlCommand("INSERT INTO actors (name) OUTPUT INSERTED.id VALUES (@ActorName);", connection);
+
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@ActorName";
+      nameParameter.Value = this.GetName();
+      command.Parameters.Add(nameParameter);
+
+      SqlDataReader reader = command.ExecuteReader();
+
+      while(reader.Read())
+      {
+        this._id = reader.GetInt32(0);
+      }
+      if (reader != null)
+      {
+        reader.Close();
+      }
+      if (connection != null)
+      {
+        connection.Close();
+      }
+    }
+
     public string GetName()
     {
       return _name;
