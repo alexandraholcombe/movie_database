@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Movie Internet Database (NOT IMDB)</title>
+</head>
+<body>
+  <h1>Movie Successfully Added</h1>
+
+  <h2>@Model.GetMovieTitle()</h2>
+
+  <ul>
+    @foreach (Actor actor in Model.GetActors())
+    {
+      <li>@actor.GetName()</li>
+    }
+  </ul>
+</body>
+</html>
