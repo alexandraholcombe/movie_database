@@ -1,6 +1,7 @@
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using System;
+using Xunit;
 
 namespace Catalog.Objects
 {
@@ -82,6 +83,36 @@ namespace Catalog.Objects
       {
         this._id = reader.GetInt32(0);
       }
+      if (reader != null)
+      {
+        reader.Close();
+      }
+      if (connection != null)
+      {
+        connection.Close();
+      }
+    }
+
+    public bool CheckForMovie()
+    {
+      bool foundMovie;
+      SqlConnection connection = DB.Connection();
+      connection.Open();
+
+      SqlCommand command = new SqlCommand("SELECT * FROM movies WHERE name=@MovieName;", connection);
+
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@MovieName";
+      nameParameter.Value = this.GetName();
+      command.Parameters.Add(nameParameter);
+      SqlDataReader reader = command.ExecuteReader();
+
+      if (reader.HasRows)
+      {
+
+      }
+
+
       if (reader != null)
       {
         reader.Close();
